@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Sinoalice</title>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="json-content.js"></script>
+</head>
+
+<body>
+    <div class="frame">
+        <div id="nm_div" class="nm_div">
+            {{ nightmares_sort }}
+        </div>
+        <div id="nightmares_img" class="nightmares_img">
+            <img class="nm_img" v-for="item in data.nightmares_data" v-bind:src="item.img"
+                v-on:mouseover="change_nm_des(item.index)" v-on:click="add_nm(item.index)">
+        </div>
+        <div id="nightmare_des" class="nightmare_des">
+            <table class="tb_nm_des" border="1">
+                <tr>
+                    <td class="nm_des" style="height: 40px;">夢魘名稱 :
+                        {{ nightmares_data[des_index].name }}
+                    </td>
+                    <td class="nm_des" style="height: 40px;">消耗SP :
+                        {{ nightmares_data[des_index].sp }}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="nm_des">準備時間 :
+                        {{ nightmares_data[des_index].prep_time }}</td>
+                    <td class="nm_des">效果持續時間 :
+                        {{ nightmares_data[des_index].duration }}</td>
+                </tr>
+                <tr>
+                    <td class="nm_des" style="height: 40px;">技能名稱</td>
+                    <td class="nm_des" style="height: 40px;">效果</td>
+                </tr>
+                <tr>
+                    <td class="nm_des">
+                        {{ nightmares_data[des_index].skill_name }}
+                    </td>
+                    <td class="nm_des">
+                        {{ nightmares_data[des_index].skill_description }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="frame">
+        <!-- <div > -->
+        <transition-group id="nm_sort" name="drog" tag="div" style="overflow:auto;">
+            <table border="1" class="nm_sort" v-for='(list,index) in lists' draggable="true"
+                @dragstart="dragStart($event, index)" @dragover="allowDrop" @drop="drop($event, index)"
+                v-bind:key="index" v-on:click="remove_nm(index)">
+                <tr>
+                    <td rowspan="3"><img class="nm_img" v-bind:src='list.img'></td>
+                    <td class="nm">{{ list.skill_name }}</td>
+                    <td class="nm">{{ list.skill_description }}</td>
+                </tr>
+                <tr>
+                    <td class="nm">準備開始 : {{ list.prep_start_time }}</td>
+                    <td class="nm">效果開始時間 : {{ list.duration_start_time }}</td>
+                </tr>
+                <!-- <tr>
+                    <td class="nm">效果開始時間 : {{ list.duration_start_time }}</td>
+                    <td class="nm">效果結束時間 : {{ list.duration_end_time }}</td>
+                </tr> -->
+            </table>
+        </transition-group>
+        <!-- </div> -->
+    </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js'></script>
+    <script>
+        var nm_time_sort_flag = false;
+        let data = {
+            des_index: 0,
+            nightmares_data: js_nightmares_data
+        }
+        let nm_des = new Vue({
+            el: "#nightmare_des",
+            data: data
+        })
+        let nm_div = new Vue({
+            el: "#nm_div",
+            data: {
+                nightmares_sort: ""
+            }
+        })
+        // 夢魘施放順序的施放時間計算
+        function nm_time_sort() {
+            nm_time_sort_flag = false;
+            function get_time(date) {
+                return (date.getMinutes() + ":" + (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()));;
+            }
+            var nm_div_nightmares_sort = "";
+            var date = new Date();
+            date.setMinutes(20);
+            date.setSeconds(00);
+            for (var i in nm_sort.lists) {
+                nm_div_nightmares_sort += nm_sort.lists[i].short_name + " > ";
+                nm_sort.lists[i].prep_start_time = get_time(date);
+                date.setSeconds(date.getSeconds() - nm_sort.lists[i].prep_time);
+                nm_sort.lists[i].prep_end_time = get_time(date);
+                nm_sort.lists[i].duration_start_time = get_time(date);
+                date.setSeconds(date.getSeconds() - nm_sort.lists[i].duration);
+                nm_sort.lists[i].duration_end_time = get_time(date);
+            }
+            if (date.getMinutes() > 50) {
+                nm_time_sort_flag = true;
+            }
+            nm_div.nightmares_sort = nm_div_nightmares_sort
+        }
+        // 夢魘施放順序排序
+        var nm_sort = new Vue({
+            el: '#nm_sort',
+            data: {
+                lists: [],
+            },
+            methods: {
+                // 拖曳夢魘排序-移動階段
+                allowDrop(e) {
+                    e.preventDefault();
+                },
+                // 拖曳夢魘排序-拖起
+                dragStart(e, index) {
+                    let tar = e.target;
+                    e.dataTransfer.setData('Text', index);
+                },
+                // 拖曳夢魘排序-放下
+                drop(e, index) {
+                    this.allowDrop(e);
+                    // console.log('drop index: ' + index);
+                    //使用一个新数组重新排序后赋给原变量
+                    let arr = this.lists.concat([]),
+                        dragIndex = e.dataTransfer.getData('Text');
+                    temp = arr.splice(dragIndex, 1);
+                    arr.splice(index, 0, temp[0]);
+                    this.lists = arr;
+                    nm_time_sort();
+                },
+                // 刪除夢魘排序
+                remove_nm(index) {
+                    nm_sort.lists.splice(index, 1);
+                    nm_time_sort();
+                }
+            }
+        })
+        // 夢魘圖片一覽
+        let nm_img = new Vue({
+            el: "#nightmares_img",
+            data: function () {
+                return {
+                    data
+                }
+            },
+            methods: {
+                // 更改下方的夢魘詳細資訊
+                change_nm_des(img_index) {
+                    data.des_index = img_index
+                },
+                // 新增夢魘到施放排序(右邊)的欄位裡
+                add_nm(img_index) {
+                    var nm_flag = false;
+                    for (var id in nm_sort.lists) {
+                        if (nm_sort.lists[id].index == img_index) {
+                            nm_flag = true;
+                        }
+                        // console.log(nm_sort.lists[id].index + " : " + nm_sort.lists[id].name);
+                    }
+                    if (!nm_flag && !nm_time_sort_flag) {
+                        nm_sort.lists.push(
+                            {
+                                index: img_index,
+                                img: data.nightmares_data[img_index].img,
+                                name: data.nightmares_data[img_index].name,
+                                short_name: data.nightmares_data[img_index].short_name,
+                                prep_time: data.nightmares_data[img_index].prep_time,
+                                duration: data.nightmares_data[img_index].duration,
+                                skill_name: data.nightmares_data[img_index].skill_name,
+                                skill_description: data.nightmares_data[img_index].skill_description,
+                                prep_start_time: "",
+                                prep_end_time: "",
+                                duration_start_time: "",
+                                duration_end_time: ""
+                            });
+                    }
+                    nm_time_sort();
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

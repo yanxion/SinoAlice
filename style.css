@@ -1,0 +1,54 @@
+div.frame {
+    /* border: 2px #000 solid; */
+    width: 49%;
+    float: left; /* 浮動，靠左對齊 */
+}
+div.nm_div{
+    word-wrap:break-word;
+    height: 60px;
+    margin: 10px;
+    font-size: 25px;
+}
+div.nightmares_img{
+    height: 49%;
+    margin: 10px;
+}
+div.nightmares_des{
+    height: 49%;
+    margin: 10px;
+}
+td.nm_des{
+    width: 50%; 
+    height: 70px; 
+}
+img.nm_img{
+    width: 80px;
+    height: 80px;
+}
+table.tb_nm_des{
+    border-collapse: collapse; 
+    width: 100%; 
+    border:2px rgb(60, 38, 255) solid;
+    text-align:center;
+}
+div:nth-child{
+    border-right: 0px; /* 把第一個div的右邊框設為0 */
+}
+
+table.nm_sort{
+    width:100%;
+    border:2px #26FF26 solid;
+    text-align:center;
+}
+table.nm_sort:hover{
+    width:100%;
+    border:2px rgb(17, 119, 17) solid;
+    text-align:center;
+}
+td.nm{
+    width:40%;
+}
+
+.drog-move {
+    transition: transform 1s;
+}
