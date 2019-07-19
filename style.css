@@ -1,5 +1,6 @@
 div.frame {
     /* border: 2px #000 solid; */
+    margin-left: 10px;
     width: 49%;
     float: left; /* 浮動，靠左對齊 */
 }
@@ -37,18 +38,18 @@ div:nth-child{
 
 table.nm_sort{
     width:100%;
-    border:2px #26FF26 solid;
+    border-bottom:1px rgb(255, 0, 149) solid; 
     text-align:center;
 }
 table.nm_sort:hover{
     width:100%;
-    border:2px rgb(17, 119, 17) solid;
+    border:2px rgb(211, 0, 0) solid;
     text-align:center;
 }
 td.nm{
     width:40%;
 }
 
-.drog-move {
+/* .drog-move {
     transition: transform 1s;
-}
+} */

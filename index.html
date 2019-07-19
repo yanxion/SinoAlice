@@ -51,9 +51,8 @@
     <div class="frame">
         <!-- <div > -->
         <transition-group id="nm_sort" name="drog" tag="div" style="overflow:auto;">
-            <table border="1" class="nm_sort" v-for='(list,index) in lists' draggable="true"
-                @dragstart="dragStart($event, index)" @dragover="allowDrop" @drop="drop($event, index)"
-                v-bind:key="index" v-on:click="remove_nm(index)">
+            <table class="nm_sort" v-for='(list,index) in lists' draggable="true" @dragstart="dragStart($event, index)"
+                @dragover="allowDrop" @drop="drop($event, index)" v-bind:key="index" v-on:click="remove_nm(index)">
                 <tr>
                     <td rowspan="3"><img class="nm_img" v-bind:src='list.img'></td>
                     <td class="nm">{{ list.skill_name }}</td>

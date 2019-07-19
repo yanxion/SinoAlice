@@ -41,30 +41,43 @@
             duration: '100', skill_name: '警鐘呼喚散華之風(Ⅲ)', skill_description: '我方全體的風屬性技能效果60%UP、敵方的火屬性傷害技能效果20%UP'
         },
         {
-            index: 8, img: 'https://sinoalice.game-db.tw/images/card/CardS1316.png', name: '黑百合之歌奧迪歐', short_name: '百合',
+            index: 8, img: 'https://sinoalice.game-db.tw/images/card/CardS1593.png', name: '黑之孤獨雨諾', sp: '0', prep_time: '50', short_name: '水警鐘',
+            duration: '100', skill_name: '警鐘呼喚散華之飛沫(Ⅲ)', skill_description: '我方全體的水屬性技能效果60%UP、敵方的風屬性傷害技能效果20%UP'
+        },
+        {
+            index: 9, img: 'https://sinoalice.game-db.tw/images/card/CardS1316.png', name: '黑百合之歌奧迪歐', short_name: '百合',
             sp: '0', prep_time: '60',
             duration: '100', skill_name: '血界拒絕祈禱(Ⅲ)', skill_description: '敵方祈禱的技能效果40%DOWN'
         },
         {
-            index: 9, img: 'https://sinoalice.game-db.tw/images/card/CardS1371.png', name: '帝龜', short_name: '狼煙',
+            index: 10, img: 'https://sinoalice.game-db.tw/images/card/CardS1371.png', name: '帝龜', short_name: '狼煙',
             sp: '0', prep_time: '60',
             duration: '120', skill_name: '咆哮為反擊的狼煙(Ⅲ)', skill_description: '劣勢時，我方前衛的傷害技能效果45%UP'
         },
         {
-            index: 10, img: 'https://sinoalice.game-db.tw/images/card/CardS1048.png', name: '藍色罌粟花', short_name: '援護',
+            index: 11, img: 'https://sinoalice.game-db.tw/images/card/CardS1048.png', name: '藍色罌粟花', short_name: '援護',
             sp: '0', prep_time: '80',
             duration: '120', skill_name: '歡聲為援助之加護(Ⅲ)', skill_description: '我方全體的輔助技能發動率1.5～2倍'
         },
         {
-            index: 11, img: 'https://sinoalice.game-db.tw/images/card/CardS0744.png', name: '砂塵之掟諾茵', short_name: '砂塵',
+            index: 12, img: 'https://sinoalice.game-db.tw/images/card/CardS0744.png', name: '砂塵之掟諾茵', short_name: '砂塵',
             sp: '0', prep_time: '50',
             duration: '100', skill_name: '嘆息為援助之阻礙(Ⅲ)', skill_description: '敵方全體的輔助技能發動率2/3～1/2倍(※當競技場時間少於2分鐘時，此技能會終止)'
         },
         {
-            index: 12, img: 'https://sinoalice.game-db.tw/images/card/CardS0558.png', name: '暴食之化身厄里斯', short_name: '妖精王',
+            index: 13, img: 'https://sinoalice.game-db.tw/images/card/CardS0558.png', name: '暴食之化身厄里斯', short_name: '妖精王',
             sp: '0', prep_time: '60',
             duration: '120', skill_name: '妖精王供給魔力(Ⅲ)', skill_description: '我方全體技能的SP消耗×70%(無條件進位至個位數)'
         },
+        {
+            index: 14, img: 'https://sinoalice.game-db.tw/images/card/CardS1451.png', name: '銜尾蛇', short_name: '銜尾蛇',
+            sp: '0', prep_time: '70',
+            duration: '0', skill_name: '偽リハ武具ヲ破壊スル(Ⅲ)', skill_description: '大規模降低所有前線敵人的物理攻擊'
+        },
+        {
+            index: 15, img: 'https://sinoalice.game-db.tw/images/card/CardS1441.png', name: '忠義の狗爪ココ', sp: '0', prep_time: '60', short_name: '狗狗',
+            duration: '100', skill_name: '血界拒絕斬擊', skill_description: '敵方刀劍和打撃的技能效果40%DOWN'
+        }
         // {
         //     index: 13, img: '', name: '', sp: '0', prep_time: '',
         //     duration: '', skill_name: '', skill_description: ''
