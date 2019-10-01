@@ -94,6 +94,10 @@
             index: 19, img: 'https://sinoalice.game-db.tw/images/card/CardS1126.png', name: '片翼人偶布蘭', sp: '0', prep_time: '60', short_name: '布蘭',
             duration: '100', skill_name: '血界拒絕樂器(Ⅲ)', skill_description: '敵方樂器的技能效果40%DOWN'
         },
+        {
+            index: 20, img: 'https://sinoalice.game-db.tw/images/card/CardS1892.png', name: '銀虎'', sp: '0', prep_time: '50', short_name: '銀虎',
+            duration: '0', skill_name: '慟哭為束縛要塞的枷鎖(Ⅲ)', skill_description: '極大幅降低敵方前衛全員（包含昏厥者）物理及魔法防禦力。'
+        },
         // {
         //     index: 18, img: '', name: '', sp: '0', prep_time: '', short_name: '',
         //     duration: '', skill_name: '', skill_description: ''
