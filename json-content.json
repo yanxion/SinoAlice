@@ -98,8 +98,21 @@
             index: 20, img: 'https://sinoalice.game-db.tw/images/card/CardS1892.png', name: '銀虎', sp: '0', prep_time: '50', short_name: '銀虎',
             duration: '0', skill_name: '慟哭為束縛要塞的枷鎖(Ⅲ)', skill_description: '極大幅降低敵方前衛全員（包含昏厥者）物理及魔法防禦力。'
         },
+        {
+            index: 21, img: 'https://sinoalice.game-db.tw/images/card/CardS1625.png', name: '狂妄之毀龍蕾薇', sp: '0', prep_time: '70', short_name: '蕾薇',
+            duration: '0', skill_name: '虛假為銳利之刃(Ⅲ)', skill_description: '我方(※前衛)生存者的物理攻撃28%UP'
+        },
+        {
+            index: 22, img: 'https://sinoalice.game-db.tw/images/card/CardS1812.png', name: '暗愚之灰塵亞茲', sp: '0', prep_time: '70', short_name: '亞茲',
+            duration: '0', skill_name: '虛假為堅牢之鎧(Ⅲ)', skill_description: '我方(※前衛)生存者的物理防禦28%UP'
+        },
+        {
+            index: 23, img: 'https://sinoalice.game-db.tw/images/card/CardS1499.png', name: '監獄的守護者費爾', sp: '200', prep_time: '40', short_name: '監守',
+            duration: '0', skill_name: '逆捲魔力之順風(Ⅲ)', skill_description: '我方前衛職業的SP35%回復'
+        }
         // {
         //     index: 18, img: '', name: '', sp: '0', prep_time: '', short_name: '',
         //     duration: '', skill_name: '', skill_description: ''
         // }
+        
     ]
