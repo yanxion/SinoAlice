@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Sinoalice</title>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="battle_history.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="battle_history_json_20191126.json"></script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- <div id="user_list">
+            {{ data.own_user_list }}
+        </div> -->
+        <div class="row">
+            <div class="col-3">
+                <div id="user_list" class="user_list">
+                    <h4><b>己方公會成員</b></h4>
+                    <font v-for="username in data.own_user_list" v-on:click="show_battle_history(username)">
+                        {{ username }} ({{ data.own_battle_list[username]  | battlecount }}) <br>
+                    </font>
+                    <h4><b> 敵方公會成員</b></h4>
+                    <font v-for="username in data.enemy_user_list" v-on:click="show_battle_history(username)">
+                        {{ username }} ({{ data.enemy_battle_list[username]  | battlecount }}) <br>
+                    </font>
+                </div>
+            </div>
+            <div class="col-3">
+                <h4><b> 武器一覽 </b></h4>
+                <div id="weapon_list" class="weapon_list">
+                    <h5 v-for="weaponname in getweaponlist()" v-on:click=" show_weapon_history(weaponname)">
+                        {{ weaponname | format }} ({{ weaponname | battlecount }})
+                    </h5>
+                </div>
+            </div>
+            <div class="col-6">
+                <h4><b> 武器詳細 </b></h4>
+                <div id="battle_history" class="battle_history">
+                    <h5 v-for="(des, timestamp) in getbattlehistory()">
+                        <hr>
+                        <pre>{{ timestamp | formatdate }} <br>{{ des }}</pre>
+                    </h5>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="frame">
+
+    </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js'></script>
+    <script>
+        var nm_time_sort_flag = false;
+        let data = {
+            own_user_list: battle_history_json['own_user_list'],
+            enemy_user_list: battle_history_json['enemy_user_list'],
+            own_battle_list: battle_history_json['own_battle_list'],
+            enemy_battle_list: battle_history_json['enemy_battle_list'],
+            battle_des_name: "None",
+            battle_des_weapon: "all_weapon"
+        }
+        let battlehis = new Vue({
+            el: "#battle_history",
+            // delimiters: ['${', '}'],
+            data: function () {
+                return {
+                    data
+                }
+            },
+            methods: {
+                getbattlehistory: function () {
+                    username = data.battle_des_name;
+                    weaponname = data.battle_des_weapon;
+                    if (username in data.own_battle_list) {
+                        return data.own_battle_list[username][weaponname]
+                    } else if (username in data.enemy_battle_list) {
+                        return data.enemy_battle_list[username][weaponname]
+                    }
+                }
+            },
+            filters: {
+                formatdate: function (timestamp) {
+                    var datetime = new Date(timestamp * 1000);
+                    var hours = datetime.getHours();
+                    var minutes = "0" + datetime.getMinutes();
+                    var seconds = "0" + datetime.getSeconds();
+                    var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+                    return formattedTime;
+                }
+            }
+        })
+        let weaponlist = new Vue({
+            el: "#weapon_list",
+            // delimiters: ['${', '}'],
+            data: function () {
+                return {
+                    data
+                }
+            },
+            methods: {
+                getweaponlist: function () {
+                    username = data.battle_des_name;
+                    if (username in data.own_battle_list) {
+                        return Object.keys(data.own_battle_list[username])
+                    } else if (username in data.enemy_battle_list) {
+                        return Object.keys(data.enemy_battle_list[username])
+                    }
+                },
+                show_weapon_history(weaponname) {
+                    data.battle_des_weapon = weaponname;
+                }
+            },
+            filters: {
+                format: function (weaponname) {
+                    if (weaponname == "all_weapon")
+                        return "所有武器";
+                    return weaponname;
+                },
+                battlecount: function (weaponname) {
+                    username = data.battle_des_name;
+                    if (username in data.own_battle_list) {
+                        return Object.keys(data.own_battle_list[username][weaponname]).length
+                    } else if (username in data.enemy_battle_list) {
+                        return Object.keys(data.enemy_battle_list[username][weaponname]).length
+                    }
+                }
+            }
+        })
+        let userlist = new Vue({
+            el: "#user_list",
+            data: function () {
+                return {
+                    data
+                }
+            },
+            methods: {
+                show_battle_history(username) {
+                    data.battle_des_name = username;
+                    data.battle_des_weapon = 'all_weapon';
+                }
+            },
+            filters: {
+                battlecount: function (data) {
+                    return Object.keys(data).length - 1
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
